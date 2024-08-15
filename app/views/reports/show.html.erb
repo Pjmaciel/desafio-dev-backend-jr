@@ -1,0 +1,10 @@
+<h1><%= t('views.reports') %></h1>
+
+<%= link_to t('actions.back_to_documents'), documents_path %>
+
+<%= render partial: 'fiscal_document_data' %>
+<%= render partial: 'listed_products' %>
+<%= render partial: 'associated_taxes' %>
+<%= render partial: 'totalizers' %>
+
+<%= link_to t('actions.back_to_documents'), documents_path %>

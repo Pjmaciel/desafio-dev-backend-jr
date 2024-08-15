@@ -1,0 +1,9 @@
+<h2><%= t('views.report_details.fiscal_document_data') %></h2>
+
+<p><%= t('views.report_details.series_number') %>: <%= @report_data[:numero_serie] %></p>
+<p><%= t('views.report_details.invoice_number') %>: <%= @report_data[:numero_nf] %></p>
+<p><%= t('views.report_details.issue_date_and_time') %>: <%= @report_data[:data_hora_emissao].strftime(t('time.formats.default')) %></p>
+<p><%= t('views.report_details.emitter_name') %>: <%= @report_data[:emitente][:nome] %></p>
+<p><%= t('views.report_details.emitter_cnpj') %>: <%= @report_data[:emitente][:cnpj] %></p>
+<p><%= t('views.report_details.recipient_name') %>: <%= @report_data[:destinatario][:nome] %></p>
+<p><%= t('views.report_details.recipient_cnpj') %>: <%= @report_data[:destinatario][:cnpj] %></p>
