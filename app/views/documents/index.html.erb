@@ -1,0 +1,20 @@
+<h1><%= t('views.uploaded_documents') %></h1>
+
+<table>
+  <thead>
+  <tr>
+    <th><%= t('labels.title') %></th>
+    <th><%= t('labels.file') %></th>
+    <th><%= t('labels.uploaded_at') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @documents.each do |document| %>
+    <%= render 'document', document: document %>
+  <% end %>
+  </tbody>
+</table>
+
+<div>
+  <%= link_to t('actions.new_document'), new_document_path, class: 'btn btn-primary' %>
+</div>
