@@ -10,15 +10,26 @@ class DocumentsController < ApplicationController
   def create
     @document = Document.new(document_params)
     if @document.save
-      redirect_to documents_path, notice: I18n.t('notices.document_uploaded')
+      ProcessXmlJob.perform_now(@document.id)
+      redirect_to documents_path, notice: 'Document successfully uploaded and processed.'
     else
       render :new
+    end
+  end
+
+  def generate_report
+    document = Document.find(params[:id])
+    if document.processed_document.present?
+      redirect_to report_path(document.processed_document.id)
+    else
+      flash[:alert] = "Report Not Available"
+      redirect_to documents_path
     end
   end
 
   private
 
   def document_params
-    params.require(:document).permit(:title, :file)
+    params.require(:document).permit(:file)
   end
 end

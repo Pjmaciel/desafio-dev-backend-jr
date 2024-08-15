@@ -2,16 +2,52 @@ pt-BR:
   views:
     upload_document: "Enviar Documento XML"
     uploaded_documents: "Documentos Enviados"
+    reports: "Relatórios"
+    report_details:
+      fiscal_document_data: "Dados do Documento Fiscal"
+      series_number: "Número da Série"
+      invoice_number: "Número da Nota Fiscal"
+      issue_date_and_time: "Data e Hora de Emissão"
+      emitter_name: "Nome do Emitente"
+      emitter_cnpj: "CNPJ do Emitente"
+      recipient_name: "Nome do Destinatário"
+      recipient_cnpj: "CNPJ do Destinatário"
+      listed_products: "Produtos Listados"
+      product_name: "Nome do Produto"
+      ncm: "NCM"
+      cfop: "CFOP"
+      unit: "Unidade"
+      quantity: "Quantidade"
+      unit_price: "Preço Unitário"
+      associated_taxes: "Impostos Associados"
+      icms: "ICMS"
+      ipi: "IPI"
+      pis: "PIS"
+      cofins: "COFINS"
+      totalizers: "Totalizadores"
+      total_products: "Total de Produtos"
+      total_taxes: "Total de Impostos"
+    documents_table:
+      title: "Título"
+      file: "Arquivo"
+      uploaded_at: "Data de Upload"
+      actions: "Ações"
+      generate_reports: "Gerar Relatórios"
+      report_not_available: "Relatório Não Disponível"
+      uploaded_documents: "Documentos Enviados"
+      upload_new_document: "Enviar Novo Documento"
   labels:
     document_title: "Título do Documento"
     xml_file: "Arquivo XML"
     title: "Título"
     file: "Arquivo"
     uploaded_at: "Data de Upload"
+    actions: "Ações"
   actions:
     upload: "Enviar"
     new_document: "Enviar Novo Documento"
     back_to_documents: "Voltar para Documentos"
+    generate_reports: "Gerar Relatórios"
   notices:
     document_uploaded: "Documento enviado com sucesso!"
   errors:
@@ -19,3 +55,7 @@ pt-BR:
     file_required: "Arquivo é obrigatório"
     messages:
       not_saved: "%{count} erro(s) impediram que %{resource} fosse salvo(a)"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: "%d/%m/%Y %H:%M"

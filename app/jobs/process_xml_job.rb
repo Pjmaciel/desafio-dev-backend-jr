@@ -2,10 +2,17 @@ class ProcessXmlJob < ApplicationJob
   queue_as :default
 
   def perform(document_id)
-    document = Document.find(document_id)
+    document = Document.find_by(id: document_id)
+
+    unless document
+      Rails.logger.warn("Document with ID #{document_id} not found. Skipping job.")
+      return
+    end
+
     xml_data = document.file.download
     parsed_data = Nokogiri::XML(xml_data)
 
+    # Extraindo dados do XML
     namespaces = { "nfe" => "http://www.portalfiscal.inf.br/nfe" }
 
     numero_serie = parsed_data.xpath('//nfe:ide/nfe:serie', namespaces).text
@@ -27,15 +34,15 @@ class ProcessXmlJob < ApplicationJob
       }
     end
 
-    icms = parsed_data.xpath('//nfe:imposto/nfe:ICMS/*/nfe:vICMS', namespaces).map { |node| (node.text.to_f * 100).to_i }
-    ipi = parsed_data.xpath('//nfe:imposto/nfe:IPI/*/nfe:vIPI', namespaces).map { |node| (node.text.to_f * 100).to_i }
-    pis = parsed_data.xpath('//nfe:imposto/nfe:PIS/*/nfe:vPIS', namespaces).map { |node| (node.text.to_f * 100).to_i }
-    cofins = parsed_data.xpath('//nfe:imposto/nfe:COFINS/*/nfe:vCOFINS', namespaces).map { |node| (node.text.to_f * 100).to_i }
+    icms = parsed_data.xpath('//nfe:imposto/nfe:ICMS/*/nfe:vICMS', namespaces).map { |node| (node.text.to_f * 100).to_i }.sum
+    ipi = parsed_data.xpath('//nfe:imposto/nfe:IPI/*/nfe:vIPI', namespaces).map { |node| (node.text.to_f * 100).to_i }.sum
+    pis = parsed_data.xpath('//nfe:imposto/nfe:PIS/*/nfe:vPIS', namespaces).map { |node| (node.text.to_f * 100).to_i }.sum
+    cofins = parsed_data.xpath('//nfe:imposto/nfe:COFINS/*/nfe:vCOFINS', namespaces).map { |node| (node.text.to_f * 100).to_i }.sum
 
-    # Totalizadores
     total_produtos = (parsed_data.xpath('//nfe:total/nfe:ICMSTot/nfe:vProd', namespaces).text.to_f * 100).to_i
     total_impostos = (parsed_data.xpath('//nfe:total/nfe:ICMSTot/nfe:vTotTrib', namespaces).text.to_f * 100).to_i
 
+    # Criando o ProcessedDocument
     ProcessedDocument.create!(
       document_id: document.id,
       numero_serie: numero_serie,
@@ -46,10 +53,10 @@ class ProcessXmlJob < ApplicationJob
       destinatario_nome: destinatario_nome,
       destinatario_cnpj: destinatario_cnpj,
       produtos: produtos.to_json,
-      icms: icms.sum,
-      ipi: ipi.sum,
-      pis: pis.sum,
-      cofins: cofins.sum,
+      icms: icms,
+      ipi: ipi,
+      pis: pis,
+      cofins: cofins,
       total_produtos: total_produtos,
       total_impostos: total_impostos
     )
