@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_15_132546) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_15_182957) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_132546) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "processed_documents", force: :cascade do |t|
+    t.bigint "document_id", null: false
+    t.string "numero_serie"
+    t.string "numero_nf"
+    t.datetime "data_hora_emissao"
+    t.string "emitente_nome"
+    t.string "emitente_cnpj"
+    t.string "destinatario_nome"
+    t.string "destinatario_cnpj"
+    t.text "produtos"
+    t.text "icms"
+    t.text "ipi"
+    t.text "pis"
+    t.text "cofins"
+    t.integer "total_produtos"
+    t.integer "total_impostos"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_id"], name: "index_processed_documents_on_document_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -62,4 +83,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_132546) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "processed_documents", "documents"
 end

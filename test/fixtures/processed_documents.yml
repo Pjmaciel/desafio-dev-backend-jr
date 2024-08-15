@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  document: one
+  numero_serie: MyString
+  numero_nf: MyString
+  data_hora_emissao: 2024-08-15 15:29:57
+  emitente_nome: MyString
+  emitente_cnpj: MyString
+  destinatario_nome: MyString
+  destinatario_cnpj: MyString
+  produtos: MyText
+  icms: MyText
+  ipi: MyText
+  pis: MyText
+  cofins: MyText
+  total_produtos: 9.99
+  total_impostos: 9.99
+
+two:
+  document: two
+  numero_serie: MyString
+  numero_nf: MyString
+  data_hora_emissao: 2024-08-15 15:29:57
+  emitente_nome: MyString
+  emitente_cnpj: MyString
+  destinatario_nome: MyString
+  destinatario_cnpj: MyString
+  produtos: MyText
+  icms: MyText
+  ipi: MyText
+  pis: MyText
+  cofins: MyText
+  total_produtos: 9.99
+  total_impostos: 9.99
