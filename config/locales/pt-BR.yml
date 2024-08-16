@@ -6,12 +6,14 @@ pt-BR:
     filters:
       filters: "Filtros"
       product_name: "Nome do Produto"
+      to_search_for: "Pesquisar"
       ncm: "NCM"
       cfop: "CFOP"
       filter_by_product_name: "Filtrar por nome..."
       filter_by_ncm: "Filtrar por NCM..."
       filter_by_cfop: "Filtrar por CFOP..."
       search: "Buscar"
+      clear_fields: "Limpar Campos"
       general_search: "Busca Geral"
       serie: "Número da Série"
       numero_nf: "Número da Nota Fiscal"
@@ -22,6 +24,11 @@ pt-BR:
       total_produtos_max: "Valor Total Máximo"
       total_icms_min: "ICMS Mínimo"
       total_icms_max: "ICMS Máximo"
+      placeholders:
+        search_term: "Digite o termo de pesquisa aqui"
+        product_name: "Exemplo: 'Produto X'"
+        ncm: "Exemplo: '1234.56.78'"
+        cfop: "Exemplo: '5102'"
     report_details:
       fiscal_document_data: "Dados do Documento Fiscal"
       series_number: "Número da Série"
@@ -46,6 +53,8 @@ pt-BR:
       totalizers: "Totalizadores"
       total_products: "Total de Produtos"
       total_taxes: "Total de Impostos"
+      results:
+        search_results: "Resultado da Pesquisa"
     documents_table:
       title: "Título"
       file: "Arquivo"

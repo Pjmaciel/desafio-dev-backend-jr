@@ -1,4 +1,4 @@
-<h1><%= t('views.reports') %></h1>
+<h1><%= @processed_document.document.title %></h1>
 
 <div>
   <%= link_to t('actions.back_to_documents'), documents_path %>
@@ -8,48 +8,78 @@
 
 <div class="flex-container" style="display: flex; width: 100%; height: 100%;">
   <!-- Filtros à esquerda -->
-  <div class="filters" style="flex: 1; padding-right: 20px; border-right: 1px solid #ddd;">
+  <div class="filters" style="flex: 2; padding-right: 20px; border-right: 1px solid #ddd;">
     <%= form_with(url: report_path(@processed_document), method: :get, local: true) do %>
       <div class="filter-group">
         <div class="filter-item" style="margin-bottom: 10px;">
+          <label><%= t('views.filters.general_search') %>:</label>
+          <%= text_field_tag :query, params[:query], placeholder: t('views.filters.placeholders.search_term'), style: "width: 50%;" %>
+        </div>
+
+        <div class="filter-item" style="margin-bottom: 10px;">
           <label><%= t('views.filters.product_name') %>:</label>
-          <%= text_field_tag :nome, params[:nome] %>
+          <%= text_field_tag :nome, params[:nome], placeholder: t('views.filters.placeholders.product_name') %>
         </div>
 
         <div class="filter-item" style="margin-bottom: 10px;">
           <label><%= t('views.filters.ncm') %>:</label>
-          <%= text_field_tag :ncm, params[:ncm] %>
+          <%= text_field_tag :ncm, params[:ncm], placeholder: t('views.filters.placeholders.ncm') %>
         </div>
 
         <div class="filter-item" style="margin-bottom: 10px;">
           <label><%= t('views.filters.cfop') %>:</label>
-          <%= text_field_tag :cfop, params[:cfop] %>
+          <%= text_field_tag :cfop, params[:cfop], placeholder: t('views.filters.placeholders.cfop') %>
         </div>
 
-        <%= submit_tag t('views.filters.search'), style: "margin-top: 10px;" %>
+        <div class="form-actions" style="margin-top: 10px; display: flex; gap: 10px;">
+          <%= submit_tag t('views.filters.search'), style: "width: 15%; height: 200%; margin-top: 10px;" %>
+          <%= link_to t('views.filters.clear_fields'), report_path(@processed_document), style: "margin-top: 10px; right;" %>
+        </div>
       </div>
     <% end %>
   </div>
 
   <!-- Resultados à direita -->
   <div id="results" style="flex: 2; padding-left: 20px;">
-    <% if params[:nome].present? || params[:ncm].present? || params[:cfop].present? %>
-      <div id="product-list">
-        <%= render partial: 'listed_products', locals: { products: @filtered_products } %>
-      </div>
+    <% if params[:query].present? && @filtered_results.present? %>
+      <h4><%= t('views.report_details.results.search_results') %></h4>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tbody>
+        <% @filtered_results.each do |result| %>
+          <% result.each do |key, value| %>
+            <tr>
+              <td style="padding: 5px 10px; border-bottom: 1px solid #ddd;"><%= format_key(key) %></td>
+              <td style="padding: 5px 10px; border-bottom: 1px solid #ddd;"><%= value %></td>
+            </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    <% elsif params[:query].blank? && (params[:nome].present? || params[:ncm].present? || params[:cfop].present?) && @filtered_products.present? %>
+      <h4><%= t('views.report_details.results.search_results') %></h4>
+      <%= render partial: 'listed_products', locals: { products: @filtered_products } %>
+    <% elsif params[:query].present? %>
+      <p><%= t('errors.no_results') %></p>
     <% end %>
   </div>
 </div>
 
-<div id="loading" style="display:none; text-align:center;">Loading...</div>
 
 <!-- Outras informações abaixo -->
-<div style="clear: both;"></div>
-<%= render partial: 'fiscal_document_data' %>
-<%= render partial: 'listed_products', locals: { products: @filtered_products } %>
-<%= render partial: 'associated_taxes' %>
-<%= render partial: 'totalizers' %>
+<div style="clear: both; margin-top: 20px;">
+  <h2><%= t('views.report_details.fiscal_document_data') %></h2>
+  <%= render partial: 'fiscal_document_data' %>
 
-<div>
+  <h2><%= t('views.report_details.listed_products') %></h2>
+  <%= render partial: 'listed_products', locals: { products: @all_products } %>
+
+  <h2><%= t('views.report_details.associated_taxes') %></h2>
+  <%= render partial: 'associated_taxes' %>
+
+  <h2><%= t('views.report_details.totalizers') %></h2>
+  <%= render partial: 'totalizers' %>
+</div>
+
+<div style="margin-top: 20px;">
   <%= link_to t('actions.back_to_documents'), documents_path %>
 </div>
