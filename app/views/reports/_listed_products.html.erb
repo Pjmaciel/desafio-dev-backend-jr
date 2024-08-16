@@ -1,6 +1,6 @@
 <h2><%= t('views.report_details.listed_products') %></h2>
 
-<% @report_data[:produtos].each do |produto| %>
+<% products.each do |produto| %>
   <p><%= t('views.report_details.product_name') %>: <%= produto[:nome] %></p>
   <p><%= t('views.report_details.ncm') %>: <%= produto[:ncm] %></p>
   <p><%= t('views.report_details.cfop') %>: <%= produto[:cfop] %></p>

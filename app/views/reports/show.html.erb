@@ -1,10 +1,55 @@
 <h1><%= t('views.reports') %></h1>
 
-<%= link_to t('actions.back_to_documents'), documents_path %>
+<div>
+  <%= link_to t('actions.back_to_documents'), documents_path %>
+</div>
 
+<h4><%= t('views.filters.filters') %></h4>
+
+<div class="flex-container" style="display: flex; width: 100%; height: 100%;">
+  <!-- Filtros à esquerda -->
+  <div class="filters" style="flex: 1; padding-right: 20px; border-right: 1px solid #ddd;">
+    <%= form_with(url: report_path(@processed_document), method: :get, local: true) do %>
+      <div class="filter-group">
+        <div class="filter-item" style="margin-bottom: 10px;">
+          <label><%= t('views.filters.product_name') %>:</label>
+          <%= text_field_tag :nome, params[:nome] %>
+        </div>
+
+        <div class="filter-item" style="margin-bottom: 10px;">
+          <label><%= t('views.filters.ncm') %>:</label>
+          <%= text_field_tag :ncm, params[:ncm] %>
+        </div>
+
+        <div class="filter-item" style="margin-bottom: 10px;">
+          <label><%= t('views.filters.cfop') %>:</label>
+          <%= text_field_tag :cfop, params[:cfop] %>
+        </div>
+
+        <%= submit_tag t('views.filters.search'), style: "margin-top: 10px;" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Resultados à direita -->
+  <div id="results" style="flex: 2; padding-left: 20px;">
+    <% if params[:nome].present? || params[:ncm].present? || params[:cfop].present? %>
+      <div id="product-list">
+        <%= render partial: 'listed_products', locals: { products: @filtered_products } %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="loading" style="display:none; text-align:center;">Loading...</div>
+
+<!-- Outras informações abaixo -->
+<div style="clear: both;"></div>
 <%= render partial: 'fiscal_document_data' %>
-<%= render partial: 'listed_products' %>
+<%= render partial: 'listed_products', locals: { products: @filtered_products } %>
 <%= render partial: 'associated_taxes' %>
 <%= render partial: 'totalizers' %>
 
-<%= link_to t('actions.back_to_documents'), documents_path %>
+<div>
+  <%= link_to t('actions.back_to_documents'), documents_path %>
+</div>
