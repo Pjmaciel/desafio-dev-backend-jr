@@ -1,0 +1,2 @@
+console.log("Atualizando lista de produtos...");
+$("#product-list").html("<%= j render partial: 'listed_products', locals: { products: @filtered_products } %>");

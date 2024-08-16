@@ -1,5 +1,6 @@
 class Document < ApplicationRecord
   has_one_attached :file
+  has_one :processed_document, dependent: :destroy
 
   before_save :set_title_from_file_name, if: -> { file.present? }
 
