@@ -1,19 +1,24 @@
-# frozen_string_literal: true
+require 'rails_helper'
 
-require 'rspec'
-
-RSpec.describe 'ProcessedDocument' do
-  before do
-    # Do nothing
+RSpec.describe ProcessedDocument, type: :model do
+  let(:processed_document) do
+    create(:processed_document, produtos: [
+      {
+        "nome" => "Produto Teste",
+        "ncm" => "1234",
+        "cfop" => "5102",
+        "unidade_comercializada" => 1000,
+        "quantidade_comercializada" => 2000,
+        "valor_unitario" => 15000
+      }
+    ].to_json)
   end
 
-  after do
-    # Do nothing
-  end
-
-  context 'when condition' do
-    it 'succeeds' do
-      pending 'Not implemented'
+  describe "#parsed_produtos" do
+    it "returns parsed JSON of produtos" do
+      expect(processed_document.parsed_produtos).to be_a(Array)
+      expect(processed_document.parsed_produtos.first["nome"]).to eq("Produto Teste")
+      expect(processed_document.parsed_produtos.first["ncm"]).to eq("1234")
     end
   end
 end
