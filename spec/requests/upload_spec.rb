@@ -18,7 +18,7 @@ RSpec.describe "Document Uploads", type: :request do
 
     it "does not upload an invalid file type" do
       post documents_path, params: { document: { title: "Invalid file", file: fixture_file_upload('spec/fixtures/files/sample.txt', 'text/plain') } }
-      expect(response.body).to include("File deve ser um arquivo XML")
+      expect(response.body).to include("O arquivo deve ser do tipo XML ou ZIP.")
     end
   end
 end

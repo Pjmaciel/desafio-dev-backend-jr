@@ -67,11 +67,20 @@ RSpec.describe DocumentsController, type: :controller do
       end
     end
 
-    context "when the document does not have a processed document" do
-      it "sets a flash alert and redirects to the documents path" do
+    context 'when the document has a processed document' do
+      let!(:processed_document) { create(:processed_document, document: document) }
+
+      it 'redirects to the report path' do
         get :generate_report, params: { id: document.id }
-        expect(response).to redirect_to(documents_path)
+        expect(response).to redirect_to(report_path(processed_document.id))
+      end
+    end
+
+    context 'when the document does not have a processed document' do
+      it 'sets a flash alert and redirects to the documents path' do
+        get :generate_report, params: { id: document.id }
         expect(flash[:alert]).to eq("Report Not Available")
+        expect(response).to redirect_to(documents_path)
       end
     end
   end
