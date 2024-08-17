@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nfe="http://www.portalfiscal.inf.br/nfe" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.portalfiscal.inf.br/nfe ">
+  <nfe:ide>
+    <nfe:serie>123</nfe:serie>
+    <nfe:NF>456</nfe:NF>
+    <nfe:dhEmi>2024-08-15T12:34:56</nfe:dhEmi>
+  </nfe:ide>
+  <nfe:emit>
+    <nfe:xNome>Emitente Teste</nfe:xNome>
+    <nfe:CNPJ>12345678000195</nfe:CNPJ>
+  </nfe:emit>
+  <nfe:dest>
+    <nfe:xNome>Destinatário Teste</nfe:xNome>
+    <nfe:CNPJ>98765432000154</nfe:CNPJ>
+  </nfe:dest>
+  <nfe:det>
+    <nfe:prod>
+      <nfe:xProd>Produto A</nfe:xProd>
+      <nfe:NCM>1234</nfe:NCM>
+      <nfe:CFOP>5678</nfe:CFOP>
+      <nfe:uCom>UN</nfe:uCom>
+      <nfe:qCom>10</nfe:qCom>
+      <nfe:vUnCom>100.00</nfe:vUnCom>
+    </nfe:prod>
+  </nfe:det>
+  <nfe:det>
+    <nfe:prod>
+      <nfe:xProd>Produto B</nfe:xProd>
+      <nfe:NCM>2345</nfe:NCM>
+      <nfe:CFOP>6789</nfe:CFOP>
+      <nfe:uCom>UN</nfe:uCom>
+      <nfe:qCom>5</nfe:qCom>
+      <nfe:vUnCom>200.00</nfe:vUnCom>
+    </nfe:prod>
+  </nfe:det>
+  <nfe:imposto>
+    <nfe:ICMS>
+      <nfe:vICMS>100.00</nfe:vICMS>
+    </nfe:ICMS>
+    <nfe:IPI>
+      <nfe:vIPI>50.00</nfe:vIPI>
+    </nfe:IPI>
+    <nfe:PIS>
+      <nfe:vPIS>20.00</nfe:vPIS>
+    </nfe:PIS>
+    <nfe:COFINS>
+      <nfe:vCOFINS>30.00</nfe:vCOFINS>
+    </nfe:COFINS>
+  </nfe:imposto>
+  <nfe:total>
+    <nfe:ICMSTot>
+      <nfe:vProd>1500.00</nfe:vProd>
+      <nfe:vTotTrib>200.00</nfe:vTotTrib>
+    </nfe:ICMSTot>
+  </nfe:total>
+</root>
