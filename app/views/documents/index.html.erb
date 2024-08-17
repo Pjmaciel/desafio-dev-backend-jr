@@ -9,19 +9,22 @@
   </tr>
 
   <% @documents.each do |document| %>
-    <tr>
-      <td><%= document.title %></td>
-      <td><%= document.file.filename %></td>
-      <td><%= document.created_at.strftime(t('time.formats.default')) %></td>
-      <td>
-        <% if document.processed_document.present? %>
-          <%= link_to t('views.documents_table.generate_reports'), report_path(document.processed_document.id) %>
-        <% else %>
-          <p><%= t('views.documents_table.report_not_available') %></p>
-        <% end %>
-      </td>
-    </tr>
+    <% document.processed_documents.each do |processed_document| %>
+      <tr>
+        <td><%= processed_document.file_name %></td>
+        <td><%= document.file.filename %></td>
+        <td><%= document.created_at.strftime(t('time.formats.default')) %></td>
+        <td>
+          <% if document.processed_documents.any? %>
+            <%= link_to t('views.documents_table.generate_reports'), report_path(processed_document.id) %>
+          <% else %>
+            <p><%= t('views.documents_table.report_not_available') %></p>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
   <% end %>
+
 </table>
 
 <%= link_to t('views.documents_table.upload_new_document'), new_document_path %>

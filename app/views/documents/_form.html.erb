@@ -1,7 +1,7 @@
-<%= form_with(model: @document, local: true) do |form| %>
+<%= form_with(model: @document, local: true, id: 'document-form') do |form| %>
   <% if @document.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t('errors.messages.not_saved', count: @document.errors.count, resource: t('activerecord.models.document')) %></h2>
+    <div id="error_explanation" class="alert alert-danger">
+      <h4><%= pluralize(@document.errors.count, t('errors.messages.not_saved', count: @document.errors.count, resource: @document.class.model_name.human.downcase)) %></h4>
       <ul>
         <% @document.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -10,11 +10,10 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.file_field :file, class: 'form-control' %>
+  <div class="form-group">
+    <!-- <%= form.label :file, t('labels.xml_file') %> -->
+    <%= form.file_field :file, class: 'form-control', id: 'file-input' %>
   </div>
 
-  <div>
-    <%= form.submit t('actions.upload'), class: 'btn btn-success' %>
-  </div>
+  <%= form.submit t('actions.upload'), class: 'btn btn-primary' %>
 <% end %>
