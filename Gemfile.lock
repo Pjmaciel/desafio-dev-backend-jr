@@ -334,6 +334,7 @@ DEPENDENCIES
   rails-controller-testing
   redis (>= 4.0.1)
   rspec-rails (~> 5.0.0)
+  rubyzip
   selenium-webdriver
   sidekiq
   simplecov
