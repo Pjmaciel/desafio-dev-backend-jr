@@ -5,6 +5,8 @@ pt-BR:
         signed_in: 'Login efetuado com sucesso.'
         signed_out: 'Logout efetuado com sucesso.'
     failure:
+      unauthenticated: 'Usuario não autenticado'
+      already_authenticated: "Usuario ja autenticado"
       user:
         invalid: 'E-mail ou senha inválidos.'
   views:
