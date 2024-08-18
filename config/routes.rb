@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     post :generate_report, on: :member
   end
 
-  resources :reports, only: [:show]
+  resources :reports, only: [:show] do
+    member do
+      get :export_to_excel
+    end
+  end
 
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
