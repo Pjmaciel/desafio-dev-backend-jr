@@ -109,7 +109,7 @@ class ProcessXmlJob < ApplicationJob
         cofins: cofins,
         total_produtos: total_produtos,
         total_impostos: total_impostos,
-        file_name: file_name # Nome do arquivo XML ou do ZIP
+        file_name: file_name
       )
     rescue Nokogiri::XML::SyntaxError => e
       Rails.logger.error("Error processing document ID #{document.id}: Invalid XML - #{e.message}")
