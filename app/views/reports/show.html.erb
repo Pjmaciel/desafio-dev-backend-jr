@@ -1,8 +1,14 @@
 <h1><%= @processed_document.document.title %></h1>
 
-<div>
-  <%= link_to t('actions.back_to_documents'), documents_path %>
+<%= link_to t('actions.back_to_documents'), documents_path %>
+
+<div style="text-align: start; margin-top: 20px; margin-left: 530px">
+  <%= button_to t('labels.export_to_xls'), export_to_excel_report_path(@processed_document, format: :xlsx),
+                id: "export-to-excel-btn",
+                class: "btn btn-primary",
+                method: :get %>
 </div>
+
 
 <h4><%= t('views.filters.filters') %></h4>
 
@@ -33,7 +39,7 @@
 
         <div class="form-actions" style="margin-top: 10px; display: flex; gap: 10px;">
           <%= submit_tag t('views.filters.search'), style: "width: 15%; height: 200%; margin-top: 10px;" %>
-          <%= link_to t('views.filters.clear_fields'), report_path(@processed_document), style: "margin-top: 10px; right;" %>
+          <%= link_to t('views.filters.clear_fields'), report_path(@processed_document), style: "margin-top: 10px; margin-left: 410px" %>
         </div>
       </div>
     <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_15_182957) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_17_150428) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_182957) do
     t.integer "total_impostos"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "file_name"
     t.index ["document_id"], name: "index_processed_documents_on_document_id"
   end
 

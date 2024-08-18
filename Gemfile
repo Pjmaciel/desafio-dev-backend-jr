@@ -39,6 +39,10 @@ gem "redis", ">= 4.0.1"
 
 gem 'nokogiri'
 
+gem 'rubyzip'
+
+gem 'caxlsx'
+gem 'caxlsx_rails'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -59,6 +63,12 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
   gem 'dotenv-rails'
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'simplecov', require: false
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
 end
 
 group :development do

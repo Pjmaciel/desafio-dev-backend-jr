@@ -1,0 +1,42 @@
+wb = xlsx_package.workbook
+
+# Define o estilo de negrito
+bold_style = wb.styles.add_style(b: true)
+
+wb.add_worksheet(name: "Relatório") do |sheet|
+  sheet.add_row ["Dados do Documento Fiscal"], style: bold_style
+  sheet.add_row ["Número da Série", @processed_document.numero_serie]
+  sheet.add_row ["Número da Nota Fiscal", @processed_document.numero_nf]
+  sheet.add_row ["Data e Hora de Emissão", @processed_document.data_hora_emissao]
+  sheet.add_row ["Nome do Emitente", @processed_document.emitente_nome]
+  sheet.add_row ["CNPJ do Emitente", @processed_document.emitente_cnpj]
+  sheet.add_row ["Nome do Destinatário", @processed_document.destinatario_nome]
+  sheet.add_row ["CNPJ do Destinatário", @processed_document.destinatario_cnpj]
+
+  sheet.add_row []
+  sheet.add_row ["Produtos Listados"], style: bold_style
+  sheet.add_row ["Nome do Produto", "NCM", "CFOP", "Unidade", "Quantidade", "Preço Unitário"], style: bold_style
+
+  @products.each do |product|
+    sheet.add_row [
+      product['nome'],
+      product['ncm'],
+      product['cfop'],
+      product['unidade_comercializada'],
+      product['quantidade_comercializada'],
+      product['valor_unitario']
+    ]
+  end
+
+  sheet.add_row []
+  sheet.add_row ["Impostos Associados"], style: bold_style
+  sheet.add_row ["ICMS", @processed_document.icms]
+  sheet.add_row ["IPI", @processed_document.ipi]
+  sheet.add_row ["PIS", @processed_document.pis]
+  sheet.add_row ["COFINS", @processed_document.cofins]
+
+  sheet.add_row []
+  sheet.add_row ["Totalizadores"], style: bold_style
+  sheet.add_row ["Total de Produtos", @processed_document.total_produtos]
+  sheet.add_row ["Total de Impostos", @processed_document.total_impostos]
+end

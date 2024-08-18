@@ -1,7 +1,16 @@
 pt-BR:
+  devise:
+    sessions:
+      user:
+        signed_in: 'Login efetuado com sucesso.'
+        signed_out: 'Logout efetuado com sucesso.'
+    failure:
+      user:
+        invalid: 'E-mail ou senha inválidos.'
   views:
     upload_document: "Enviar Documento XML"
     uploaded_documents: "Documentos Enviados"
+    upload_instructions: "Envie um arquivo XML ou um arquivo ZIP contendo múltiplos arquivos XML."
     reports: "Relatórios"
     filters:
       filters: "Filtros"
@@ -66,9 +75,10 @@ pt-BR:
       upload_new_document: "Enviar Novo Documento"
   labels:
     document_title: "Título do Documento"
-    xml_file: "Arquivo XML"
+    xml_file: "Carregar Arquivos"
     title: "Título"
     file: "Arquivo"
+    export_to_xls: "Exportar para Excel"
     uploaded_at: "Data de Upload"
     actions: "Ações"
   actions:
@@ -80,12 +90,15 @@ pt-BR:
   notices:
     document_uploaded: "Documento enviado com sucesso!"
   errors:
-    invalid_file_type: "deve ser um arquivo XML"
-    file_required: "Arquivo é obrigatório"
+    invalid_file_type: "O arquivo deve ser do tipo XML ou ZIP."
+    file_required: "É necessário anexar um arquivo."
     no_results: "Nenhum resultado encontrado."
+    not_saved: "%{count} erro(s) impediram que %{resource} fosse salvo(a)"
     messages:
       not_saved: "%{count} erro(s) impediram que %{resource} fosse salvo(a)"
       enter_any_information: "Insira qualquer informação"
+      invalid_file_type: "deve ser um arquivo XML ou ZIP"
+      file_required: "Arquivo é obrigatório"
   time:
     formats:
       default: "%d/%m/%Y %H:%M"

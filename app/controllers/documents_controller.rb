@@ -19,13 +19,17 @@ class DocumentsController < ApplicationController
 
   def generate_report
     document = Document.find(params[:id])
-    if document.processed_document.present?
-      redirect_to report_path(document.processed_document.id)
+    processed_document = document.processed_documents.last
+
+    if processed_document.present?
+      redirect_to report_path(processed_document.id)
     else
       flash[:alert] = "Report Not Available"
       redirect_to documents_path
     end
   end
+
+
 
   private
 

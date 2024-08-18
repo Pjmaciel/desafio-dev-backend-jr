@@ -3,17 +3,28 @@ class ReportsController < ApplicationController
     @processed_document = ProcessedDocument.find(params[:id])
     @report_data = ReportGenerator.new([@processed_document]).generate.first
 
-    # Carrega todos os produtos para exibição na seção "Outras informações abaixo"
-    @all_products = @report_data[:produtos]
+    @all_products = JSON.parse(@processed_document.produtos, symbolize_names: true)
 
-    # Realiza a pesquisa geral, caso params[:query] esteja preenchido
+
+
     if params[:query].present?
       @filtered_results = search_in_document(@report_data, params[:query])
     end
 
-    # Aplica o filtro de produtos apenas se um dos campos específicos estiver preenchido e o campo `query` estiver vazio
+
     if params[:query].blank? && (params[:nome].present? || params[:ncm].present? || params[:cfop].present?)
       @filtered_products = filter_products(@all_products)
+    end
+  end
+
+  def export_to_excel
+    @processed_document = ProcessedDocument.find(params[:id])
+
+    # Converte o JSON armazenado no campo 'produtos' para um array de hashes
+    @products = JSON.parse(@processed_document.produtos)
+
+    respond_to do |format|
+      format.xlsx
     end
   end
 
@@ -41,7 +52,7 @@ class ReportsController < ApplicationController
 
   def filter_products(products)
     products.select do |product|
-      (params[:nome].blank? || product[:nome].include?(params[:nome])) &&
+      (params[:nome].blank? || product[:nome]&.include?(params[:nome])) &&
         (params[:ncm].blank? || product[:ncm] == params[:ncm]) &&
         (params[:cfop].blank? || product[:cfop] == params[:cfop])
     end
