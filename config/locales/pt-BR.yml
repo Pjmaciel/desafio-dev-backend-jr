@@ -78,6 +78,7 @@ pt-BR:
     xml_file: "Carregar Arquivos"
     title: "Título"
     file: "Arquivo"
+    export_to_xls: "Exportar para Excel"
     uploaded_at: "Data de Upload"
     actions: "Ações"
   actions:
