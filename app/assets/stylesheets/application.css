@@ -13,3 +13,52 @@
  *= require_tree .
  *= require_self
  */
+
+container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filters {
+    width: 30%;
+}
+
+#results {
+    width: 65%;
+}
+
+filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filter-item {
+    flex: 1 1 calc(33.333% - 1rem);
+    min-width: 200px;
+}
+
+.card {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    font-weight: bold;
+    font-size: 1.25em;
+    margin-bottom: 15px;
+}
+
+.card-content {
+    margin-bottom: 10px;
+}
+
+.filter-item {
+    margin-bottom: 10px;
+}
+
+

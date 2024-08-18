@@ -1,0 +1,5 @@
+<tr>
+  <td><%= document.title %></td>
+  <td><%= link_to document.file.filename, rails_blob_path(document.file, disposition: "attachment") %></td>
+  <td><%= document.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+</tr>

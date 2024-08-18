@@ -5,6 +5,11 @@ ruby "3.3.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 
+
+gem 'devise'
+
+gem 'i18n'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -26,8 +31,18 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+
+gem 'sidekiq'
+
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0.1"
+
+gem 'nokogiri'
+
+gem 'rubyzip'
+
+gem 'caxlsx'
+gem 'caxlsx_rails'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -47,6 +62,13 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem 'dotenv-rails'
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'simplecov', require: false
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
 end
 
 group :development do

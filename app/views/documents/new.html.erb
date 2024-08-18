@@ -1,0 +1,38 @@
+<h1><%= t('views.upload_document') %></h1>
+<p><%= t('views.upload_instructions') %></p>
+
+<%= form_with(model: @document, local: true, id: 'document-form') do |form| %>
+  <% if @document.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h4><%= pluralize(@document.errors.count, t('errors.messages.not_saved', count: @document.errors.count, resource: @document.class.model_name.human.downcase)) %></h4>
+      <ul>
+        <% @document.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :file, t('labels.xml_file') + ":" %>
+    <%= form.file_field :file, class: 'form-control', id: 'file-input' %>
+  </div>
+
+  <%= form.submit t('actions.upload'), class: 'btn btn-primary' %>
+<% end %>
+
+<%= link_to t('actions.back_to_documents'), documents_path, class: 'btn btn-secondary' %>
+
+<script>
+    document.getElementById('file-input').addEventListener('change', function(event) {
+        const fileName = event.target.value.toLowerCase();
+        const allowedExtensions = ['.zip', '.xml'];
+
+        const isValid = allowedExtensions.some(ext => fileName.endsWith(ext));
+
+        if (!isValid) {
+            alert('<%= t('errors.invalid_file_type') %>');
+            event.target.value = ''; // Clear the input field
+        }
+    });
+</script>

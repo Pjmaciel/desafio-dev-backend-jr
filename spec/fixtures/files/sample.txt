@@ -1,0 +1,5 @@
+Número de Série: 123
+Número NF: 456
+Emitente: Emitente Teste
+Destinatário: Destinatário Teste
+Produtos: Produto A, Produto B
